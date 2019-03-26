@@ -31,6 +31,17 @@ class Search extends Component {
         });
     };
 
+    handleBookSave = () => {
+        console.log(this);
+        // API.saveBook({
+        //     title: ,
+        //     authors: [],
+        //     description: ,
+        //     image: ,
+        //     link: 
+        // })
+    }
+
 
     render() {
         return (
@@ -53,6 +64,7 @@ class Search extends Component {
                             <h4>{book.volumeInfo.description}</h4>
                             <h4>{book.volumeInfo.infoLink}</h4>
                             <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />
+                            <button className="saver" onClick={this.handleBookSave}>Save Book</button>
                         </ListItem>
                     ))}
                 </List>
