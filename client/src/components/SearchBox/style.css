@@ -1,0 +1,10 @@
+.book-search {
+    border: 2px solid black;
+    padding: 5%;
+    width: 95%;
+}
+
+h3 {
+    text-align: left;
+    margin: auto;
+}
