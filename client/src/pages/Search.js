@@ -3,34 +3,36 @@ import Navbar from "../components/Navbar";
 import Jumbotron from "../components/Jumbotron";
 import SearchBox from "../components/SearchBox";
 import API from "../utils/API";
-import { FormBtn } from "../components/Form";
-import { List, ListItem } from "../components/List";
 import { Container } from "../components/Grid";
+import Card from "../components/Card";
 
 class Search extends Component {
-
+    // Setting state for search input, empty array for books to be called
     state = {
         bookData: [],
         bookInput: ""
     }
-
+    // Method to search for books when submit button pressed
     handleFormSubmit = e => {
         e.preventDefault();
         API.searchBook(this.state.bookInput)
             .then((res) => {
                 this.setState({ bookData: res.data.items });
-                console.log(this.state.bookData);
             })
             .catch(err => console.log(err));
     }
-
+    // Method to change the state of the search value as user enters it
     handleInputChange = e => {
         const { name, value } = e.target;
         this.setState({
             [name]: value
         });
     };
-
+    // Method to prompt user to view saved books after saving each one
+    saveNotify = () => {
+        if (window.confirm("Book Saved! View your saved books?")) { window.location.assign("/saved") };
+    }
+    // Method to save a book
     handleBookSave = (id) => {
         const book = this.state.bookData.find(book => book.id === id);
         console.log(book);
@@ -40,11 +42,10 @@ class Search extends Component {
             description: book.volumeInfo.description,
             image: book.volumeInfo.imageLinks.thumbnail,
             link: book.volumeInfo.infoLink
-        }).then(data => console.log(data))
-        .catch(err => console.log(err))
+        }).then(data => this.saveNotify())
+            .catch(err => console.log(err))
     }
-
-
+    // Rendering, mapping over each book rendered by search
     render() {
         return (
             <Container fluid>
@@ -56,20 +57,19 @@ class Search extends Component {
                 <SearchBox
                     name="bookInput"
                     onChange={this.handleInputChange}
+                    FormBtn onClick={this.handleFormSubmit}
                 />
-                <FormBtn onClick={this.handleFormSubmit}>Submit</FormBtn>
-                <List>
                     {this.state.bookData.map(book => (
-                        <ListItem key={book.id}>
-                            <h3>{book.volumeInfo.title}</h3>
-                            <h4>{book.volumeInfo.authors}</h4>
-                            <p>{book.volumeInfo.description}</p>
-                            <a href={book.volumeInfo.infoLink}>Info Link</a>
-                            <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />
-                            <FormBtn  onClick={ () => this.handleBookSave(book.id) }>Save Book</FormBtn>
-                        </ListItem>
+                        <Card key={book.id}
+                            title={book.volumeInfo.title}
+                            authors={book.volumeInfo.authors}
+                            description={book.volumeInfo.description}
+                            image={book.volumeInfo.imageLinks.thumbnail}
+                            infoLink={book.volumeInfo.infoLink}
+                            display="Save Book"
+                            FormBtn onClick={() => this.handleBookSave(book.id)}
+                        />
                     ))}
-                </List>
             </Container>
         )
     };
