@@ -57,16 +57,16 @@ class Search extends Component {
                     name="bookInput"
                     onChange={this.handleInputChange}
                 />
-                <FormBtn onClick={this.handleFormSubmit} />
+                <FormBtn onClick={this.handleFormSubmit}>Submit</FormBtn>
                 <List>
                     {this.state.bookData.map(book => (
                         <ListItem key={book.id}>
                             <h3>{book.volumeInfo.title}</h3>
                             <h4>{book.volumeInfo.authors}</h4>
-                            <h4>{book.volumeInfo.description}</h4>
-                            <h4>{book.volumeInfo.infoLink}</h4>
+                            <p>{book.volumeInfo.description}</p>
+                            <a href={book.volumeInfo.infoLink}>Info Link</a>
                             <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title} />
-                            <button className="saver" onClick={ () => this.handleBookSave(book.id) }>Save Book</button>
+                            <FormBtn  onClick={ () => this.handleBookSave(book.id) }>Save Book</FormBtn>
                         </ListItem>
                     ))}
                 </List>
