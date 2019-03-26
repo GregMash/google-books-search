@@ -52,7 +52,7 @@ class Search extends Component {
                 <Navbar />
                 <Jumbotron>
                     <h1>React Google Books Search</h1>
-                    <p>Use the search below to add new books to add to your library or reading list</p>
+                    <h5>Use the search below to add new books to your library or wishlist</h5>
                 </Jumbotron>
                 <SearchBox
                     name="bookInput"

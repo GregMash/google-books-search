@@ -36,7 +36,7 @@ class Saved extends Component {
                     <Navbar />
                     <Jumbotron>
                         <h1>Saved Books</h1>
-                        <p>A list of your current saved books...</p>
+                        <h5>A list of your current saved books...</h5>
                     </Jumbotron>
                     {this.state.books.map(book => (
                         <Card key={book._id}
