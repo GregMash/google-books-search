@@ -10,9 +10,12 @@ This MERN stack application allows users to search for books using the Google Bo
 
 ## Hosted on heroku
 
-https://protected-ocean-99841.herokuapp.com/
+[App](https://protected-ocean-99841.herokuapp.com/)
 
 ## Technologies utilized
+ - HTML
+ - CSS
+ - Javascript
  - Mongo Db
  - Express JS
  - React JS
